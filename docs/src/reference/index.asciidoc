@@ -24,29 +24,29 @@ include::preface.asciidoc[]
 
 include::intro.asciidoc[]
 
-include::the-graph.asciidoc[]
+// include::the-graph.asciidoc[]
 
-include::the-traversal.asciidoc[]
+// include::the-traversal.asciidoc[]
 
-include::the-graphcomputer.asciidoc[]
+// include::the-graphcomputer.asciidoc[]
 
 include::gremlin-applications.asciidoc[]
 
 include::gremlin-variants.asciidoc[]
 
-include::implementations-intro.asciidoc[]
-include::implementations-tinkergraph.asciidoc[]
-include::implementations-neo4j.asciidoc[]
+// include::implementations-intro.asciidoc[]
+// include::implementations-tinkergraph.asciidoc[]
+// include::implementations-neo4j.asciidoc[]
 
 // the hadoop section is split into parts because of serialization issues that are encountered when trying
 // to generate graph/spark without restarting the console and currently the only way to force a restart of the
 // console is to have a new asciidoc page.
-include::implementations-hadoop-start.asciidoc[]
-include::implementations-spark.asciidoc[]
-include::implementations-hadoop-end.asciidoc[]
+// include::implementations-hadoop-start.asciidoc[]
+// include::implementations-spark.asciidoc[]
+// include::implementations-hadoop-end.asciidoc[]
 
-include::compilers.asciidoc[]
+// include::compilers.asciidoc[]
 
-include::conclusion.asciidoc[]
+// include::conclusion.asciidoc[]
 
-include::acknowledgements.asciidoc[]
+// include::acknowledgements.asciidoc[]
