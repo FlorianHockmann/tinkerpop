@@ -22,6 +22,7 @@
 #endregion
 
 using Gremlin.Net.Process.Traversal;
+using Gremlin.Net.Structure;
 using Xunit;
 
 namespace Gremlin.Net.IntegrationTest.Process.Traversal.DriverRemoteConnection

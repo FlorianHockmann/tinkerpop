@@ -974,8 +974,7 @@ the remote end.
 
 [source,csharp]
 ----
-var remoteConnection = new DriverRemoteConnection(new GremlinClient(new GremlinServer("localhost", 8182)));
-var g = Traversal().WithRemote(remoteConnection);
+include::../../../gremlin-dotnet/test/Gremlin.Net.IntegrationTest/Docs/Reference/GremlinVariantsTests.cs[tags=connecting]
 ----
 
 === Common Imports
