@@ -74,7 +74,7 @@ limitations under the License.
         <dependency>
             <groupId>com.squareup</groupId>
             <artifactId>javapoet</artifactId>
-            <version>1.8.0</version>
+            <version>1.11.1</version>
         </dependency>
         <dependency>
             <groupId>net.objecthunter</groupId>
