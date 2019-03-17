@@ -75,7 +75,7 @@ setup(
         'more_itertools<6.0.0',
         'pytest',
         'mock',
-        'radish-bdd==0.8.6',
+        'radish-bdd==0.12.1',
         'PyHamcrest'
     ],
     install_requires=install_requires,
