@@ -72,7 +72,7 @@ setup(
     tests_require=[
         # more_itertools used by pytest but causes build issues given the following:
         # https://github.com/pytest-dev/pytest/issues/4770
-        'more_itertools<6.0.0',
+        'more_itertools<8.0.0',
         'pytest',
         'mock',
         'radish-bdd==0.8.6',
