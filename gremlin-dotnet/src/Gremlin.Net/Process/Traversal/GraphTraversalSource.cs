@@ -248,9 +248,9 @@ namespace Gremlin.Net.Process.Traversal
         ///     Add a GraphComputer class used to execute the traversal.
         ///     This adds a <see cref="VertexProgramStrategy" /> to the strategies.
         /// </summary>
-        public GraphTraversalSource WithComputer(string graphComputer = null, int? workers = null, string persist = null,
-            string result = null, ITraversal vertices = null, ITraversal edges = null,
-            Dictionary<string, dynamic> configuration = null)
+        public GraphTraversalSource WithComputer(string? graphComputer = null, int? workers = null,
+            string? persist = null, string? result = null, ITraversal? vertices = null, ITraversal? edges = null,
+            Dictionary<string, dynamic>? configuration = null)
         {
             return WithStrategies(new VertexProgramStrategy(graphComputer, workers, persist, result, vertices, edges, configuration));
         }

@@ -31,14 +31,14 @@ namespace Gremlin.Net.Driver
     {
         private readonly GraphSONReader _graphSONReader;
         private readonly GraphSONWriter _graphSONWriter;
-        private readonly Action<ClientWebSocketOptions> _webSocketConfiguration;
+        private readonly Action<ClientWebSocketOptions>? _webSocketConfiguration;
         private readonly GremlinServer _gremlinServer;
         private readonly string _mimeType;
-        private readonly string _sessionId;
+        private readonly string? _sessionId;
 
         public ConnectionFactory(GremlinServer gremlinServer, GraphSONReader graphSONReader,
             GraphSONWriter graphSONWriter, string mimeType,
-            Action<ClientWebSocketOptions> webSocketConfiguration, string sessionId)
+            Action<ClientWebSocketOptions>? webSocketConfiguration, string? sessionId)
         {
             _gremlinServer = gremlinServer;
             _mimeType = mimeType;

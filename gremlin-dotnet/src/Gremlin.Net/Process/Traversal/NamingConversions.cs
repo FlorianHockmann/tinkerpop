@@ -34,8 +34,7 @@ namespace Gremlin.Net.Process.Traversal
         internal static string GetEnumJavaName(string typeName, string value)
         {
             var key = $"{typeName}.{value}";
-            string javaName;
-            if (!CSharpToJavaEnums.TryGetValue(key, out javaName))
+            if (!CSharpToJavaEnums.TryGetValue(key, out var javaName))
             {
                 throw new KeyNotFoundException($"Java name for {key} not found");
             }

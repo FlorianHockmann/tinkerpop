@@ -23,7 +23,7 @@
 
 using System;
 using Newtonsoft.Json;
-
+#nullable disable
 namespace Gremlin.Net.Driver.Messages
 {
     internal class ResponseMessage<T>

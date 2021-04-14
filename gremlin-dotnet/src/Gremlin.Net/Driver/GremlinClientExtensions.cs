@@ -52,7 +52,7 @@ namespace Gremlin.Net.Driver
         /// </exception>
         public static async Task<T> SubmitWithSingleResultAsync<T>(this IGremlinClient gremlinClient,
             string requestScript,
-            Dictionary<string, object> bindings = null)
+            Dictionary<string, object>? bindings = null)
         {
             var resultCollection = await gremlinClient.SubmitAsync<T>(requestScript, bindings).ConfigureAwait(false);
             return resultCollection.FirstOrDefault();
@@ -93,7 +93,7 @@ namespace Gremlin.Net.Driver
         ///     that an error occurred.
         /// </exception>
         public static async Task SubmitAsync(this IGremlinClient gremlinClient, string requestScript,
-            Dictionary<string, object> bindings = null)
+            Dictionary<string, object>? bindings = null)
         {
             await gremlinClient.SubmitAsync<object>(requestScript, bindings).ConfigureAwait(false);
         }
@@ -128,7 +128,7 @@ namespace Gremlin.Net.Driver
         /// </exception>
         public static async Task<ResultSet<T>> SubmitAsync<T>(this IGremlinClient gremlinClient,
             string requestScript,
-            Dictionary<string, object> bindings = null)
+            Dictionary<string, object>? bindings = null)
         {
             var msgBuilder = RequestMessage.Build(Tokens.OpsEval).AddArgument(Tokens.ArgsGremlin, requestScript);
             if (bindings != null)

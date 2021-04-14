@@ -43,13 +43,13 @@ namespace Gremlin.Net.Process.Traversal
         ///     Gets or sets the <see cref="ITraversalSideEffects" /> of this traversal.
         /// </summary>
         #pragma warning disable 612,618
-        ITraversalSideEffects SideEffects { get; set; }
+        ITraversalSideEffects? SideEffects { get; set; }
         #pragma warning disable 612,618
 
         /// <summary>
         ///     Gets or sets the <see cref="Traverser" />'s of this traversal that hold the results of the traversal.
         /// </summary>
-        IEnumerable<Traverser> Traversers { get; set; }
+        IEnumerable<Traverser>? Traversers { get; set; }
 
         /// <summary>
         ///     Iterates all <see cref="Traverser" /> instances in the traversal.

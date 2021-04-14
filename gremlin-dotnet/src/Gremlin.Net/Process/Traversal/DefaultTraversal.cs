@@ -24,6 +24,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -34,23 +35,23 @@ namespace Gremlin.Net.Process.Traversal
     /// </summary>
     public abstract class DefaultTraversal<S, E> : ITraversal<S, E>
     {
-        private IEnumerator<Traverser> _traverserEnumerator;
+        private IEnumerator<Traverser>? _traverserEnumerator;
 
         /// <summary>
         ///     Gets the <see cref="Traversal.Bytecode" /> representation of this traversal.
         /// </summary>
-        public Bytecode Bytecode { get; protected set; }
+        public Bytecode Bytecode { get; protected set; } = new Bytecode();
 
         /// <summary>
         ///     Gets or sets the <see cref="ITraversalSideEffects" /> of this traversal.
         /// </summary>
         [Obsolete("As of release 3.3.8, not replaced, prefer use of cap()-step to retrieve side-effects as part of traversal iteration", false)]
-        public ITraversalSideEffects SideEffects { get; set; }
+        public ITraversalSideEffects? SideEffects { get; set; }
 
         /// <summary>
         ///     Gets or sets the <see cref="Traverser" />'s of this traversal that hold the results of the traversal.
         /// </summary>
-        public IEnumerable<Traverser> Traversers { get; set; }
+        public IEnumerable<Traverser>? Traversers { get; set; }
 
         ITraversal ITraversal.Iterate()
         {
@@ -112,8 +113,8 @@ namespace Gremlin.Net.Process.Traversal
         /// <inheritdoc />
         public E Current => GetCurrent<E>();
 
-        object IEnumerator.Current => GetCurrent();
-
+        object IEnumerator.Current => GetCurrent()!;
+        
         private TReturn GetCurrent<TReturn>()
         {
             var value = GetCurrent();
@@ -121,12 +122,12 @@ namespace Gremlin.Net.Process.Traversal
             if (value == null || value.GetType() == returnType)
             {
                 // Avoid evaluating type comparisons
-                return (TReturn) value;
+                return (TReturn) value!;
             }
             return (TReturn) GetValue(returnType, value);
         }
 
-        private object GetCurrent()
+        private object? GetCurrent()
         {
             // Use dynamic to object to prevent runtime dynamic conversion evaluation
             return TraverserEnumerator.Current?.Object;
@@ -135,7 +136,8 @@ namespace Gremlin.Net.Process.Traversal
         /// <summary>
         /// Gets the value, converting to the expected type when necessary and supported. 
         /// </summary>
-        private static object GetValue(Type type, object value)
+        [return: NotNullIfNotNull("value")]
+        private static object? GetValue(Type type, object? value)
         {
             var genericType = type.GetTypeInfo().IsGenericType
                 ? type.GetTypeInfo().GetGenericTypeDefinition()
@@ -145,9 +147,10 @@ namespace Gremlin.Net.Process.Traversal
                 var keyType = type.GenericTypeArguments[0];
                 var valueType = type.GenericTypeArguments[1];
                 var mapType = typeof(Dictionary<,>).MakeGenericType(keyType, valueType);
-                var result = (IDictionary) Activator.CreateInstance(mapType);
-                foreach (DictionaryEntry kv in dictValue)
+                var result = (IDictionary) Activator.CreateInstance(mapType)!;
+                foreach (var kvVar in dictValue)
                 {
+                    var kv = (DictionaryEntry) kvVar!;
                     result.Add(GetValue(keyType, kv.Key), GetValue(valueType, kv.Value));
                 }
                 return result;
@@ -156,7 +159,7 @@ namespace Gremlin.Net.Process.Traversal
             {
                 var childType = type.GenericTypeArguments[0];
                 var listType = typeof(List<>).MakeGenericType(childType);
-                var result = (IList) Activator.CreateInstance(listType);
+                var result = (IList) Activator.CreateInstance(listType)!;
                 foreach (var itemValue in enumerableValue)
                 {
                     result.Add(itemValue);
@@ -170,7 +173,10 @@ namespace Gremlin.Net.Process.Traversal
         {
             if (Traversers == null)
                 ApplyStrategies();
-            return Traversers.GetEnumerator();
+            
+            if (Traversers == null) throw new InvalidOperationException("No traversers to enumerate");
+
+                return Traversers.GetEnumerator();
         }
 
         private void ApplyStrategies()

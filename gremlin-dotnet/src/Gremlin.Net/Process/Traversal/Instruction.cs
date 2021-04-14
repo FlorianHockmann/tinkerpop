@@ -33,7 +33,7 @@ namespace Gremlin.Net.Process.Traversal
         /// </summary>
         /// <param name="operatorName">The name of the operator.</param>
         /// <param name="arguments">The arguments.</param>
-        public Instruction(string operatorName, params dynamic[] arguments)
+        public Instruction(string operatorName, params dynamic?[] arguments)
         {
             OperatorName = operatorName;
             Arguments = arguments;
@@ -47,6 +47,6 @@ namespace Gremlin.Net.Process.Traversal
         /// <summary>
         ///     Gets the arguments.
         /// </summary>
-        public dynamic[] Arguments { get; }
+        public dynamic?[] Arguments { get; }
     }
 }

@@ -40,7 +40,7 @@ namespace Gremlin.Net.Driver
 
         private readonly GraphSONReader _graphSONReader;
         private bool _isAggregatingSideEffects;
-        private IAggregator _aggregator;
+        private IAggregator? _aggregator;
         private readonly List<T> _result = new List<T>();
 
         public ResponseHandlerForSingleRequestMessage(GraphSONReader graphSonReader)
@@ -58,10 +58,8 @@ namespace Gremlin.Net.Driver
             {
                 if (received.Result.Meta.ContainsKey(Tokens.ArgsSideEffectKey))
                 {
-                    if (_aggregator == null)
-                        _aggregator =
-                            new AggregatorFactory().GetAggregatorFor(
-                                (string) received.Result.Meta[Tokens.ArgsAggregateTo]);
+                    _aggregator ??= new AggregatorFactory().GetAggregatorFor(
+                        (string) received.Result.Meta[Tokens.ArgsAggregateTo]);
                     _aggregator.Add(d);
                     _isAggregatingSideEffects = true;
                 }
@@ -77,7 +75,7 @@ namespace Gremlin.Net.Driver
         {
             var resultSet =
                 new ResultSet<T>(
-                    _isAggregatingSideEffects ? new List<T> {(T) _aggregator.GetAggregatedResult()} : _result,
+                    _isAggregatingSideEffects ? new List<T> {(T) _aggregator!.GetAggregatedResult()} : _result,
                     statusAttributes);
             _tcs.TrySetResult(resultSet);
         }

@@ -24,7 +24,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
+#nullable disable
 namespace Gremlin.Net.Driver.Messages
 {
     internal class ResponseResult

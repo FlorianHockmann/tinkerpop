@@ -36,6 +36,17 @@ namespace Gremlin.Net.IntegrationTest.Process.Traversal.DriverRemoteConnection
         private readonly RemoteConnectionFactory _connectionFactory = new RemoteConnectionFactory();
 
         [Fact]
+        public void g_V_HasXnull_Count()
+        {
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = AnonymousTraversalSource.Traversal().WithRemote(connection);
+
+            var count = g.V().Has(null).Count().Next();
+
+            Assert.Equal(6, count);
+        }
+        
+        [Fact]
         public void g_V_Count()
         {
             var connection = _connectionFactory.CreateRemoteConnection();

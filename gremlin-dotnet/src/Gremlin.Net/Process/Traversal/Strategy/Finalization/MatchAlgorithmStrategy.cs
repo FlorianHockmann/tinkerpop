@@ -30,7 +30,7 @@ namespace Gremlin.Net.Process.Traversal.Strategy.Finalization
         {
         }
 
-        public MatchAlgorithmStrategy(string matchAlgorithm = null)
+        public MatchAlgorithmStrategy(string? matchAlgorithm = null)
         {
             if (matchAlgorithm != null)
                 Configuration["matchAlgorithm"] = matchAlgorithm;

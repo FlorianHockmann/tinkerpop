@@ -52,7 +52,7 @@ namespace Gremlin.Net.Process.Traversal
         }
 
         /// <inheritdoc />
-        public bool Equals(EnumWrapper other)
+        public bool Equals(EnumWrapper? other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -60,7 +60,7 @@ namespace Gremlin.Net.Process.Traversal
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;

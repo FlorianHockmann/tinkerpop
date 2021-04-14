@@ -56,7 +56,7 @@ namespace Gremlin.Net.Process.Traversal
         {
             if (typeof(S2) == typeof(S) && typeof(E2) == typeof(E))
             {
-                return traversal as GraphTraversal<S2, E2>;
+                return (traversal as GraphTraversal<S2, E2>)!;
             }
             // New wrapper
             return new GraphTraversal<S2, E2>(traversal.TraversalStrategies, traversal.Bytecode);
@@ -609,6 +609,7 @@ namespace Gremlin.Net.Process.Traversal
         ///     Adds the group step to this <see cref="GraphTraversal{SType, EType}" />.
         /// </summary>
         public GraphTraversal<S, IDictionary<K, V>> Group<K, V> ()
+            where K : notnull
         {
             Bytecode.AddStep("group");
             return Wrap<S, IDictionary<K, V>>(this);
@@ -627,6 +628,7 @@ namespace Gremlin.Net.Process.Traversal
         ///     Adds the groupCount step to this <see cref="GraphTraversal{SType, EType}" />.
         /// </summary>
         public GraphTraversal<S, IDictionary<K, long>> GroupCount<K> ()
+            where K : notnull
         {
             Bytecode.AddStep("groupCount");
             return Wrap<S, IDictionary<K, long>>(this);
@@ -1695,6 +1697,7 @@ namespace Gremlin.Net.Process.Traversal
         ///     Adds the valueMap step to this <see cref="GraphTraversal{SType, EType}" />.
         /// </summary>
         public GraphTraversal<S, IDictionary<TKey, TValue>> ValueMap<TKey, TValue> (params string[] propertyKeys)
+            where TKey : notnull
         {
             var args = new List<object>(0 + propertyKeys.Length) {};
             args.AddRange(propertyKeys);
@@ -1706,6 +1709,7 @@ namespace Gremlin.Net.Process.Traversal
         ///     Adds the valueMap step to this <see cref="GraphTraversal{SType, EType}" />.
         /// </summary>
         public GraphTraversal<S, IDictionary<TKey, TValue>> ValueMap<TKey, TValue> (bool includeTokens, params string[] propertyKeys)
+            where TKey : notnull
         {
             var args = new List<object>(1 + propertyKeys.Length) {includeTokens};
             args.AddRange(propertyKeys);

@@ -49,9 +49,9 @@ namespace Gremlin.Net.Driver
         private readonly JsonMessageSerializer _messageSerializer;
         private readonly Uri _uri;
         private readonly WebSocketConnection _webSocketConnection;
-        private readonly string _username;
-        private readonly string _password;
-        private readonly string _sessionId;
+        private readonly string? _username;
+        private readonly string? _password;
+        private readonly string? _sessionId;
         private readonly bool _sessionEnabled;
         private readonly ConcurrentQueue<RequestMessage> _writeQueue = new ConcurrentQueue<RequestMessage>();
 
@@ -61,9 +61,9 @@ namespace Gremlin.Net.Driver
         private int _writeInProgress = 0;
         private const int Closed = 1;
 
-        public Connection(Uri uri, string username, string password, GraphSONReader graphSONReader,
+        public Connection(Uri uri, string? username, string? password, GraphSONReader graphSONReader,
             GraphSONWriter graphSONWriter, string mimeType,
-            Action<ClientWebSocketOptions> webSocketConfiguration, string sessionId)
+            Action<ClientWebSocketOptions>? webSocketConfiguration, string? sessionId)
         {
             _uri = uri;
             _username = username;
@@ -132,11 +132,11 @@ namespace Gremlin.Net.Driver
 
             try
             {
-                TryParseResponseMessage(receivedMsg);
+                TryParseResponseMessage(receivedMsg!);
             }
             catch (Exception e)
             {
-                if (_callbackByRequestId.TryRemove(receivedMsg.RequestId, out var responseHandler))
+                if (_callbackByRequestId.TryRemove(receivedMsg!.RequestId, out var responseHandler))
                 {
                     responseHandler?.HandleFailure(e);
                 }
@@ -265,7 +265,7 @@ namespace Gremlin.Net.Driver
             {
                 msgBuilder.AddArgument(kv.Key, kv.Value);
             }
-            msgBuilder.AddArgument(Tokens.ArgsSession, _sessionId);
+            msgBuilder.AddArgument(Tokens.ArgsSession, _sessionId!);
             return msgBuilder.Create();
         }
 

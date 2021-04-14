@@ -67,15 +67,15 @@ namespace Gremlin.Net.Structure.IO.GraphSON
         internal static Dictionary<string, dynamic> ToCollection(dynamic objectData, GraphSONWriter writer,
                                                                string typename)
         {
-            var collection = objectData as IEnumerable;
-            if (collection == null)
+            if (!(objectData is IEnumerable collection))
             {
                 throw new InvalidOperationException("Object must implement IEnumerable");
             }
             var result = new List<object>();
             foreach (var item in collection)
             {
-                result.Add(writer.ToDict(item));
+                result.Add(
+                    writer.ToDict(item ?? throw new InvalidOperationException("Collection contains a null item")));
             }
             return ToTypedValue(typename, result);
         }

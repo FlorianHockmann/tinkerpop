@@ -126,7 +126,7 @@ namespace Gremlin.Net.Structure.IO.GraphSON
             return objectData;
         }
 
-        private IGraphSONSerializer TryGetSerializerFor(Type type)
+        private IGraphSONSerializer? TryGetSerializerFor(Type type)
         {
             if (Serializers.ContainsKey(type))
             {
@@ -140,7 +140,7 @@ namespace Gremlin.Net.Structure.IO.GraphSON
             return null;
         }
 
-        private bool IsDictionaryType(Type type)
+        private static bool IsDictionaryType(Type type)
         {
             return type.IsConstructedGenericType && type.GetGenericTypeDefinition() == typeof(Dictionary<,>);
         }
@@ -149,11 +149,14 @@ namespace Gremlin.Net.Structure.IO.GraphSON
         {
             var graphSONDict = new Dictionary<string, dynamic>();
             foreach (var keyValue in dict)
-                graphSONDict.Add(ToDict(keyValue.Key), ToDict(keyValue.Value));
+            {
+                graphSONDict.Add(ToDict(keyValue!.Key!),
+                    ToDict(keyValue!.Value ?? throw new InvalidOperationException("Dictionary value cannot be null")));
+            }
             return graphSONDict;
         }
 
-        private bool IsCollectionType(Type type)
+        private static bool IsCollectionType(Type type)
         {
             return type.GetInterfaces().Contains(typeof(ICollection));
         }

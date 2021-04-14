@@ -44,7 +44,7 @@ namespace Gremlin.Net.Process
             }
             catch (AggregateException ex)
             {
-                if (ex.InnerExceptions.Count == 1)
+                if (ex.InnerExceptions.Count == 1 && ex.InnerException != null)
                 {
                     ExceptionDispatchInfo.Capture(ex.InnerException).Throw();   
                 }

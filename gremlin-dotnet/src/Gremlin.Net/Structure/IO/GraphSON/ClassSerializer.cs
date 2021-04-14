@@ -23,7 +23,7 @@
 
 using System;
 using System.Collections.Generic;
-
+#nullable disable
 namespace Gremlin.Net.Structure.IO.GraphSON
 {
     internal class ClassSerializer : IGraphSONSerializer

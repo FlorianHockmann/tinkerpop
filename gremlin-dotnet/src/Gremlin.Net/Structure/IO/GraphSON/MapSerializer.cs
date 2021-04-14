@@ -25,7 +25,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
-
+#nullable disable
 namespace Gremlin.Net.Structure.IO.GraphSON
 {
     internal class MapSerializer : IGraphSONDeserializer, IGraphSONSerializer

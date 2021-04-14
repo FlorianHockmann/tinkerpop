@@ -47,8 +47,8 @@ namespace Gremlin.Net.Process.Traversal.Strategy.Decoration
         /// </param>
         /// <param name="readPartitions">Specifies the partition of the graph to read from.</param>
         /// <param name="includeMetaProperties">Set to true if vertex properties should get assigned to partitions.</param>
-        public PartitionStrategy(string partitionKey = null, string writePartition = null,
-            IEnumerable<string> readPartitions = null, bool? includeMetaProperties = null)
+        public PartitionStrategy(string? partitionKey = null, string? writePartition = null,
+            IEnumerable<string>? readPartitions = null, bool? includeMetaProperties = null)
         {
             if (partitionKey != null)
                 Configuration["partitionKey"] = partitionKey;

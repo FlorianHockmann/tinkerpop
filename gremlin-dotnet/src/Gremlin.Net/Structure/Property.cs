@@ -59,7 +59,7 @@ namespace Gremlin.Net.Structure
         public Element Element { get; }
 
         /// <inheritdoc />
-        public bool Equals(Property other)
+        public bool Equals(Property? other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -73,7 +73,7 @@ namespace Gremlin.Net.Structure
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;

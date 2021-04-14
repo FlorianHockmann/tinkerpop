@@ -30,7 +30,7 @@ namespace Gremlin.Net.Process.Traversal.Strategy.Decoration
         {
         }
 
-        public HaltedTraverserStrategy(string haltedTraverserFactoryName = null)
+        public HaltedTraverserStrategy(string? haltedTraverserFactoryName = null)
         {
             if (haltedTraverserFactoryName != null)
                 Configuration["haltedTraverserFactory"] = haltedTraverserFactoryName;

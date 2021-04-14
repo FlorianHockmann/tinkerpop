@@ -416,6 +416,7 @@ namespace Gremlin.Net.Process.Traversal
         ///     Spawns a <see cref="GraphTraversal{SType, EType}" /> and adds the group step to that traversal.
         /// </summary>
         public static GraphTraversal<object, IDictionary<K, V>> Group<K, V>()
+            where K : notnull
         {
             return new GraphTraversal<object, IDictionary<K, V>>().Group<K, V>();            
         }
@@ -432,6 +433,7 @@ namespace Gremlin.Net.Process.Traversal
         ///     Spawns a <see cref="GraphTraversal{SType, EType}" /> and adds the groupCount step to that traversal.
         /// </summary>
         public static GraphTraversal<object, IDictionary<K, long>> GroupCount<K>()
+            where K : notnull
         {
             return new GraphTraversal<object, IDictionary<K, long>>().GroupCount<K>();            
         }
@@ -1282,6 +1284,7 @@ namespace Gremlin.Net.Process.Traversal
         ///     Spawns a <see cref="GraphTraversal{SType, EType}" /> and adds the valueMap step to that traversal.
         /// </summary>
         public static GraphTraversal<object, IDictionary<TKey, TValue>> ValueMap<TKey, TValue>(params string[] propertyKeys)
+            where TKey : notnull
         {
             return propertyKeys.Length == 0
                 ? new GraphTraversal<object, IDictionary<TKey, TValue>>().ValueMap<TKey, TValue>()
@@ -1292,6 +1295,7 @@ namespace Gremlin.Net.Process.Traversal
         ///     Spawns a <see cref="GraphTraversal{SType, EType}" /> and adds the valueMap step to that traversal.
         /// </summary>
         public static GraphTraversal<object, IDictionary<TKey, TValue>> ValueMap<TKey, TValue>(bool includeTokens, params string[] propertyKeys)
+            where TKey : notnull
         {
             return propertyKeys.Length == 0
                 ? new GraphTraversal<object, IDictionary<TKey, TValue>>().ValueMap<TKey, TValue>(includeTokens)

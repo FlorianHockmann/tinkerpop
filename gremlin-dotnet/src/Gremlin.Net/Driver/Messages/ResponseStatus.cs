@@ -24,7 +24,7 @@
 using System.Collections.Generic;
 using Gremlin.Net.Driver.Exceptions;
 using Newtonsoft.Json;
-
+#nullable disable
 namespace Gremlin.Net.Driver.Messages
 {
     internal class ResponseStatus

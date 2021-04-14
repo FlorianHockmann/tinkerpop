@@ -66,11 +66,11 @@ namespace Gremlin.Net.Structure
         /// <param name="label">The label of the path</param>
         /// <returns>The object associated with the label of the path</returns>
         /// <exception cref="KeyNotFoundException">Thrown if the path does not contain the label.</exception>
-        public object this[string label]
+        public object? this[string label]
         {
             get
             {
-                var objFound = TryGetValue(label, out object obj);
+                var objFound = TryGetValue(label, out var obj);
                 if (!objFound)
                     throw new KeyNotFoundException($"The step with label {label} does not exist");
                 return obj;
@@ -78,7 +78,7 @@ namespace Gremlin.Net.Structure
         }
 
         /// <inheritdoc />
-        public bool Equals(Path other)
+        public bool Equals(Path? other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -129,9 +129,9 @@ namespace Gremlin.Net.Structure
         /// </summary>
         /// <remarks>If the path has multiple labels of the type, then get a collection of those objects.</remarks>
         /// <param name="label">The label of the path.</param>
-        /// <param name="value">The object associated with the label of the path.</param>
+        /// <param name="value">The object associated with the label of the path or null if no object was found.</param>
         /// <returns>True, if an object was found for the label.</returns>
-        public bool TryGetValue(string label, out object value)
+        public bool TryGetValue(string label, out object? value)
         {
             value = null;
             for (var i = 0; i < Labels.Count; i++)
@@ -175,7 +175,7 @@ namespace Gremlin.Net.Structure
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
